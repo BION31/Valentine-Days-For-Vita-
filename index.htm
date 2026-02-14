@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for Devita 💕</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-dark: #ff4d6d;
+            --pink-medium: #ff758f;
+            --pink-light: #ffb3c1;
+            --pink-bg: #fff0f3;
+            --text-color: #590d22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--pink-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- Efek Hati Jatuh --- */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .falling-heart {
+            position: absolute;
+            color: var(--pink-medium);
+            opacity: 0.6;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* --- Music Button --- */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 20px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(255, 240, 243, 0.7), rgba(255, 240, 243, 0.7)), 
+                        url('f30cacf28224b224c40f276741771929_0.jpg') center/cover;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--pink-dark);
+            margin-bottom: 10px;
+        }
+
+        .heart-logo {
+            font-size: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .heart-logo:active { transform: scale(0.8); }
+
+        /* --- Photo Grid Section --- */
+        .section-padding { padding: 80px 20px; text-align: center; }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .photo-card {
+            background: linear-gradient(45deg, var(--pink-light), var(--pink-medium));
+            border-radius: 20px;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 77, 109, 0.3);
+        }
+
+        .placeholder-text {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            color: white;
+            font-weight: 600;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+
+        /* --- Promises Section --- */
+        .promises-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .promise-item {
+            background: white;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.6s all ease-out;
+        }
+
+        .promise-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .promise-icon { font-size: 24px; }
+
+        /* --- Footer Section --- */
+        .footer-section {
+            background: #2b0d14;
+            color: white;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-pink {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: var(--pink-dark);
+            filter: blur(100px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .footer-content { position: relative; z-index: 1; }
+        
+        .footer-content h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--pink-light);
+        }
+
+        #counter {
+            margin: 20px 0;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .final-btn {
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .final-btn:hover { background: #d90429; transform: translateY(-3px); }
+
+        footer { padding: 20px; font-size: 12px; opacity: 0.7; }
+
+        /* Animation Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heartContainer"></div>
+
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵</button>
+    
+    <audio id="bgMusic" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <section class="hero">
+        <div class="heart-logo" id="mainHeart" onclick="handleEasterEgg()">❤️</div>
+        <h1>For You, My Mine</h1>
+		<h1> Devita 💋</h1>
+        <p class="reveal">  Maaf Kalau Aku Telat 👉👈</p>
+		<p class="reveal"> Scroll down to see our story...</p>
+    </section>
+
+    <section class="section-padding reveal">
+        <h2>Our Moments</h2>
+        <div class="grid-container">
+            <div class="photo-card">
+                <img src="foto.jpg" alt="Cantik ">
+                <div class="placeholder-text">Cantiknya Kamu</div>
+            </div>
+            <div class="photo-card">
+                <img src="Foto2.jpg" alt="Makin Cantik">
+                <div class="placeholder-text">Intinya Cantik</div>
+            </div>
+            <div class="photo-card">
+                <img src="foto3.jpg" alt="Busettt Cantik Bettt">
+                <div class="placeholder-text">Cantik Bettt</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background-color: #fff9fa;">
+        <h2 class="reveal" style="margin-bottom: 40px;">Janji Aku Untuk Kamu 💍</h2>
+        <div class="promises-container">
+            <div class="promise-item">
+                <span class="promise-icon">✨</span>
+                <p>Aku Janji Akan terus Berusaha Jadi Versi Terbaik Dari Diriku Untuk Kamu</p>
+            </div>
+            <div class="promise-item">
+                <span class="promise-icon">💑</span>
+                <p>Aku Janji Kita Akan Selalu Bersama Sesuai Yang Kamu Inginkan</p>
+            </div>
+            <div class="promise-item">
+                <span class="promise-icon">👂</span>
+                <p>Aku Janji Akan Selalu Mendengarkan Kamu, Apapun Itu Hal Positif</p>
+            </div>
+            <div class="promise-item">
+                <span class="promise-icon">🤗</span>
+                <p>Aku Janji Akan Selalu Nemenin Kamu</p>
+            </div>
+            <div class="promise-item">
+                <span class="promise-icon">♾️</span>
+                <p>Aku Janji Akan Terus Mencintai Kamu, Hari Ini, Besok, Dan Selamanya</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-section">
+        <div class="glow-pink"></div>
+        <div class="footer-content reveal">
+            <h2>I Love You, Devita 💕</h2>
+            <p>Sekarang, Besok, Dan Selamanya — Bian</p>
+            
+            <div id="counter">Memuat Waktu Kita...</div>
+
+            <button class="final-btn" onclick="celebrate()">Klik Kalau Kamu Juga Sayang Bian</button>
+        </div>
+        
+        <footer style="margin-top: 80px;">
+            Made with ❤️ by Bian For Devita
+        </footer>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // --- Music Toggle ---
+        const audio = document.getElementById('bgMusic');
+        const mBtn = document.getElementById('musicBtn');
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                mBtn.innerText = "⏸️";
+            } else {
+                audio.pause();
+                mBtn.innerText = "🎵";
+            }
+        }
+
+        // --- Easter Egg ---
+        let heartClicks = 0;
+        function handleEasterEgg() {
+            heartClicks++;
+            if (heartClicks === 5) {
+                alert("Kamu memang kepo ya 😜 Tapi aku suka! I love you Devita!");
+                heartClicks = 0;
+            }
+        }
+
+        // --- Counter Hari ---
+        function updateCounter() {
+            const startDate = new Date("2025-09-30");
+            const now = new Date();
+            const diffTime = Math.abs(now - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('counter').innerText = `Kita sudah bersama sejak 30 September 2025 (${diffDays} hari)`;
+        }
+        updateCounter();
+
+        // --- Confetti Celebration ---
+        function celebrate() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ff758f', '#ffffff']
+            });
+            
+            setTimeout(() => {
+                alert("Aku tahu! 🥰 Happy Valentine's Day sayang!");
+            }, 500);
+        }
+
+        // --- Efek Hati Jatuh ---
+        function createFallingHeart() {
+            const container = document.getElementById('heartContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            container.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createFallingHeart, 300);
+
+        // --- Scroll Reveal Animation ---
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            const items = document.querySelectorAll(".promise-item");
+
+            reveals.forEach(el => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) el.classList.add("active");
+            });
+
+            items.forEach((el, index) => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    setTimeout(() => { el.classList.add("show"); }, index * 200);
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
+</body>
+</html>
